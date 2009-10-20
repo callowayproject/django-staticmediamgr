@@ -3,6 +3,10 @@ import os, sys
 
 APP = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(APP)
+
+APPS = os.path.join(os.path.dirname(__file__),'apps')
+sys.path.append(APPS)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -81,8 +85,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'staticmediamgr',
+    'app1',
+    'app2',
+    'app3',
 )
 
 STATIC_MEDIA_COPY_PATHS = (
     {'from': MEDIA_ROOT, 'to':os.path.join(APP, 'media2')},
 )
+
+STATIC_MEDIA_APP_MEDIA_PATH = os.path.join(APP, 'media2')
