@@ -26,3 +26,10 @@ COMPRESS_CSS = getattr(settings, 'STATIC_MEDIA_COMPRESS_CSS', False)
 #: 
 #: **Default:** ``False``
 COMPRESS_JS = getattr(settings, 'STATIC_MEDIA_COMPRESS_JS', False)
+
+#: Where should the contents of the media directory inside each entry in 
+#: INSTALLED_APPS be installed? If the value is ``None`` then application
+#: media will not be copied
+#:
+#: **Default:** ``settings.MEDIA_ROOT``
+APP_MEDIA_PATH = getattr(settings, 'STATIC_MEDIA_APP_MEDIA_PATH', settings.MEDIA_ROOT)

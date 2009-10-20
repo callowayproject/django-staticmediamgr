@@ -1,6 +1,6 @@
 import os, shutil, settings, csscompressor, jsmin
 
-def compress_copy(src, dst, compress_css=settings.COMPRESS_CSS, compress_js=settings.COMPRESS_JS):
+def compress_copy(src, dst, replace_files=True, compress_css=settings.COMPRESS_CSS, compress_js=settings.COMPRESS_JS):
     """
     A wrapper around ``shutil.copy2`` to optionally compress javascript or css
     files.
@@ -24,6 +24,9 @@ def compress_copy(src, dst, compress_css=settings.COMPRESS_CSS, compress_js=sett
     """
     root, ext = os.path.splitext(src)
     
+    if not replace_files and os.path.exists(dst):
+        return
+    
     if compress_css and ext == '.css':
         mincss = csscompressor.compress_cssfile(src)
         fileptr = open(dst, 'w').write(mincss)
@@ -38,7 +41,7 @@ def compress_copy(src, dst, compress_css=settings.COMPRESS_CSS, compress_js=sett
     else:
         shutil.copy2(src, dst)
 
-def copydir(src, dst):
+def copydir(src, dst, replace_files=True):
     """
     A port of the recursive shutil.copytree, except it assumes the 
     destination directory exists.
@@ -61,10 +64,10 @@ def copydir(src, dst):
             if os.path.isdir(srcname):
                 if not os.path.exists(dstname):
                     os.makedirs(dstname)
-                copydir(srcname, dstname)
+                copydir(srcname, dstname, replace_files)
             else:
                 #shutil.copy2(srcname, dstname)
-                compress_copy(srcname, dstname)
+                compress_copy(srcname, dstname, replace_files)
         except (IOError, os.error), why:
             errors.append((srcname, dstname, str(why)))
         # catch the Error from the recursive copytree so that we can
@@ -83,9 +86,10 @@ def copydir(src, dst):
         raise Exception, errors
 
 
-def copy(original, destination, purge=settings.PURGE_OLD_FILES):
+def copy(original, destination, purge=settings.PURGE_OLD_FILES, replace_files=True):
     """
-    Do the file copying with all the appropriate error checking.
+    Do the file copying with all the appropriate error checking. Don't replace 
+    an existing file if ``replace_files`` is ``False``
     
     :param original:
         The path to the original file/directory
@@ -95,6 +99,16 @@ def copy(original, destination, purge=settings.PURGE_OLD_FILES):
         The path to the destination file/directory
     :type destination: 
         ``string``
+    :param purge:
+        Should directories be emptied before copying. **Default:** ``settings.PURGE_OLD_FILES``
+    :type purge:
+        ``bool``
+    :param replace_files:
+        Should existing files be over-written (``True``) or kept (``False``). 
+        Whole directories will *not* be over-written. Each file within a directory
+        will be evaluated. **Default:** ``True``
+    :type replace_files:
+        ``bool``
     """
     # Check if the original exists
     if not os.path.exists(original):
@@ -103,7 +117,12 @@ def copy(original, destination, purge=settings.PURGE_OLD_FILES):
     
     # If original is a file, copy it over
     if os.path.isfile(original):
-        shutil.copy2(original, destination)
+        if os.path.isdir(destination):
+            dst_file = os.path.join(destination, os.path.basename(original))
+        else:
+            dst_file = destination
+        if os.path.exists(dst_file) and replace_files:
+            shutil.copy2(original, dst_file)
     
     # if original is a directory, check for an existing directory
     # Empty it out if configured
@@ -116,6 +135,22 @@ def copy(original, destination, purge=settings.PURGE_OLD_FILES):
             return
         elif not os.path.exists(destination):
             os.makedirs(destination)
-        copydir(original, destination)
-        
-            
+        copydir(original, destination, replace_files)
+
+
+def copy_app_media(destination=settings.APP_MEDIA_PATH):
+    """
+    Copy each application's media files to the path specified in 
+    ``STATIC_MEDIA_APP_MEDIA_PATH``. Won't do any of the django.contrib 
+    applications.
+    """
+    from django.utils import importlib
+    from django.conf import settings as global_settings
+    
+    for app in global_settings.INSTALLED_APPS:
+        if 'django.contrib' in app:
+            continue
+        mod = importlib.import_module(app)
+        app_media_path = os.path.join(os.path.abspath(mod.__path__[0]), 'media')
+        if os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
+            copy(app_media_path, destination, purge=False, replace_files=False)

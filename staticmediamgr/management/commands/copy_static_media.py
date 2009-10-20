@@ -25,4 +25,4 @@ class Command(BaseCommand):
         for configitem in sm_settings.COPY_PATHS:
             for item in glob.iglob(configitem['from']):
                 utils.copy(item, configitem['to'], self.options['purge'])
-    
+        utils.copy_app_media()
