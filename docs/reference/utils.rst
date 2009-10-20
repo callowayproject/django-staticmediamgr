@@ -1,6 +1,6 @@
-================
+===================
 Utilities Reference
-================
+===================
 
 .. automodule:: staticmediamgr.utils
    :members:

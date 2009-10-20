@@ -50,3 +50,12 @@ STATIC_MEDIA_COMPRESS_JS
 ========================
 
 Should Javascript files be compressed using a port of Douglas Crockford's `jsmin <http://www.crockford.com/javascript/jsmin.html>`_. The default is ``False``.
+
+.. _static_media_app_media_path:
+
+STATIC_MEDIA_APP_MEDIA_PATH
+===========================
+
+Where should the contents of the media directory inside each entry in ``INSTALLED_APPS`` be installed? If the value is ``None`` then application media will not be copied. The default is ``MEDIA_ROOT``\ .
+
+Application media will not overwrite existing files, so it is possible for you to override one, several or all of the files in a given application's media.

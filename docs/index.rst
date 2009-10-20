@@ -12,9 +12,11 @@ Contents:
    :maxdepth: 2
    :glob:
 
+   getting_started
    settings
    css_compression
    management_commands
+   app_media
    reference/*
 
 Indices and tables
