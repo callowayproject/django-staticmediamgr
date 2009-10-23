@@ -33,3 +33,15 @@ COMPRESS_JS = getattr(settings, 'STATIC_MEDIA_COMPRESS_JS', False)
 #:
 #: **Default:** ``settings.MEDIA_ROOT``
 APP_MEDIA_PATH = getattr(settings, 'STATIC_MEDIA_APP_MEDIA_PATH', settings.MEDIA_ROOT)
+
+#: A dictionary mapping of extension to compression command. Each command string
+#: can use ``%(outfile)s`` and ``%(infile)s`` placeholders.
+#:
+#: Example::
+#: 
+#:     STATIC_MEDIA_COMPRESS_IMG_CMDS = {
+#:         'png': '/usr/local/bin/optipng -quiet -out %(outfile)s %(infile)s',
+#:     }
+#:
+#: **Default:** ``{}``
+COMPRESS_IMG_CMDS = getattr(settings, 'STATIC_MEDIA_COMPRESS_IMG_CMDS', {})
