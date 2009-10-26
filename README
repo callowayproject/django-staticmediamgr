@@ -24,3 +24,4 @@ TODO
 * Allow the concatenation of CSS and JS files during copy
 
 * Create a template tag to minify inline CSS and javascript with caching
+
