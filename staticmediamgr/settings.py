@@ -45,3 +45,19 @@ APP_MEDIA_PATH = getattr(settings, 'STATIC_MEDIA_APP_MEDIA_PATH', settings.MEDIA
 #:
 #: **Default:** ``{}``
 COMPRESS_IMG_CMDS = getattr(settings, 'STATIC_MEDIA_COMPRESS_IMG_CMDS', {})
+
+#: A dictionary mapping a (new) file to a combination/concatenation of several
+#: other files. The concatenation is done in the order of the list. It will 
+#: compress the file according to the :data:`COMPRESS_CSS` and :ref:`COMPRESS_JS` 
+#: settings.
+#: 
+#: Example::
+#: 
+#:     STATIC_MEDIA_FILE_COMBINATIONS = {
+#:         MEDIA_ROOT+'/css/combo.css': [
+#:             MEDIA_ROOT+'/css/base.css', 
+#:             MEDIA_ROOT+'/css/forms.css', 
+#:             MEDIA_ROOT+'/css/coolui.css'],
+#:     }
+#: **Default:** ``{}``
+FILE_COMBINATIONS = getattr(settings, 'STATIC_MEDIA_FILE_COMBINATIONS', {})

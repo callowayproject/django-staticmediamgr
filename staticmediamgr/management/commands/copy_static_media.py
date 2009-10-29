@@ -22,6 +22,8 @@ class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
         self.options = kwargs
+        for key, val in sm_settings.FILE_COMBINATIONS.items():
+            combine_files(key, val)
         for configitem in sm_settings.COPY_PATHS:
             for item in glob.iglob(configitem['from']):
                 utils.copy(item, configitem['to'], self.options['purge'])

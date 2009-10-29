@@ -154,3 +154,31 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
         app_media_path = os.path.join(os.path.abspath(mod.__path__[0]), 'media')
         if os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
             copy(app_media_path, destination, purge=False, replace_files=False)
+
+
+def combine_files(destination, path_list):
+    """
+    Combine the files in ``path_list`` to create one file at ``destination``.
+    
+    :param destination: The full file path of the resulting file
+    :type destination: ``string``
+    :param path_list: A list of full file paths that should be combined
+    :type path_list: ``list``
+    """
+    result_file = open(destination, 'w')
+    
+    try:
+        try:
+            for item in path_list:
+                result_file.write(file(item).read())
+                result_file.write('\n')
+        finally:
+            result_file.close()
+    except IOError:
+        # If there was a problem, don't leave a bad file lying around
+        try:
+            if os.path.exists(destination):
+                os.remove(destination)
+        except:
+            pass
+        raise
