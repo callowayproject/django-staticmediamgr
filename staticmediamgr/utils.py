@@ -147,6 +147,8 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
     from django.utils import importlib
     from django.conf import settings as global_settings
     
+    if destination is None:
+        return
     for app in global_settings.INSTALLED_APPS:
         if 'django.contrib' in app:
             continue
