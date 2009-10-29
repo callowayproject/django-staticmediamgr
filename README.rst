@@ -2,6 +2,8 @@
 Django-StaticMediaMgr
 =====================
 
+**New in this version:** Ability to combine multiple files into a new file before copying and/or compressing them.
+
 This app provides a way to copy and consolidate static media files to one or more configured locations. This is incredibly helpful if you have your media served from another server.
 
 It consists of a management command, ``copy_static_media``, and several settings including:
@@ -16,12 +18,13 @@ It consists of a management command, ``copy_static_media``, and several settings
 
 * ``STATIC_MEDIA_APP_MEDIA_PATH``  Where (and if) should the application media be copied to automatically.
 
+* ``STATIC_MEDIA_FILE_COMBINATIONS`` Configuration of combining multiple files into one.
+
+
 TODO
 ====
 
 * Allow lossless image compression for pngs, gifs and jpegs using external tools like optiPNG.
-
-* Allow the concatenation of CSS and JS files during copy
 
 * Create a template tag to minify inline CSS and javascript with caching
 
