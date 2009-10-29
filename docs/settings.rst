@@ -59,3 +59,25 @@ STATIC_MEDIA_APP_MEDIA_PATH
 Where should the contents of the media directory inside each entry in ``INSTALLED_APPS`` be installed? If the value is ``None`` then application media will not be copied. The default is ``MEDIA_ROOT``\ .
 
 Application media will not overwrite existing files, so it is possible for you to override one, several or all of the files in a given application's media.
+
+
+.. _static_media_file_combinations:
+
+STATIC_MEDIA_FILE_COMBINATIONS
+==============================
+
+A dictionary mapping a (new) file to a combination/concatenation of several other files. The concatenation is done in the order of the list. The resulting file will be compressed according to the :data:`COMPRESS_CSS` and :data:`COMPRESS_JS` settings.
+
+For example, to combine three CSS files into one ``combo.css`` file::
+
+    STATIC_MEDIA_FILE_COMBINATIONS = {
+        MEDIA_ROOT+'/css/combo.css': [
+            MEDIA_ROOT+'/css/base.css', 
+            MEDIA_ROOT+'/css/forms.css', 
+            MEDIA_ROOT+'/css/coolui.css'],
+    }
+
+.. note::
+   File combinations are done before anything else, so make the destination path for combination files be in a directory configured in a ``from`` key in :ref:`STATIC_MEDIA_COPY_PATHS`.
+
+The original files are not touched and the destination file can safely reside with them. The default setting is an empty dictionary.

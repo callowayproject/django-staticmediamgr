@@ -7,7 +7,12 @@ Management Commands
 ``copy_static_media``
 =====================
 
-Copies all media files configured in :ref:`STATIC_MEDIA_COPY_PATHS`\ .
+* Combines any files configured in :ref:`STATIC_MEDIA_FILE_COMBINATIONS`\ .
+
+* Copies all media files configured in :ref:`STATIC_MEDIA_COPY_PATHS`\ . Compression is applied according to :ref:`STATIC_MEDIA_COMPRESS_CSS` and :ref:`STATIC_MEDIA_COMPRESS_JS` unless overridden by command-line options.
+
+* Copies all application media unless :ref:`STATIC_MEDIA_APP_MEDIA_PATH` is ``None``.
+
 
 Options
 -------
