@@ -27,6 +27,14 @@ COMPRESS_CSS = getattr(settings, 'STATIC_MEDIA_COMPRESS_CSS', False)
 #: **Default:** ``False``
 COMPRESS_JS = getattr(settings, 'STATIC_MEDIA_COMPRESS_JS', False)
 
+#: Which external javascript compression command to use. The command string
+#: can use ``%(outfile)s`` and ``%(infile)s`` placeholders. If the command
+#: is ``None`` then the internal ``jsmin`` library is used when :ref:`COMPRESS_JS`
+#: is ``True``.
+#: 
+#: **Default:** ``None`` (Use the internal compression)
+JS_COMPRESSION_CMD = getattr(settings, 'STATIC_MEDIA_JS_COMPRESSION_CMD', None)
+
 #: Where should the contents of the media directory inside each entry in 
 #: INSTALLED_APPS be installed? If the value is ``None`` then application
 #: media will not be copied

@@ -33,11 +33,14 @@ def compress_copy(src, dst, replace_files=True, compress_css=settings.COMPRESS_C
         if fileptr:
             fileptr.close()
     elif compress_js and ext == '.js':
-        js = open(src).read()
-        minjs = jsmin.jsmin(js)
-        fileptr = open(dst, 'w').write(minjs)
-        if fileptr:
-            fileptr.close()
+        if settings.JS_COMPRESSION_CMD:
+            os.system(settings.JS_COMPRESSION_CMD % {'infile': src, 'outfile': dst})
+        else:
+            js = open(src).read()
+            minjs = jsmin.jsmin(js)
+            fileptr = open(dst, 'w').write(minjs)
+            if fileptr:
+                fileptr.close()
     else:
         shutil.copy2(src, dst)
 

@@ -51,6 +51,15 @@ STATIC_MEDIA_COMPRESS_JS
 
 Should Javascript files be compressed using a port of Douglas Crockford's `jsmin <http://www.crockford.com/javascript/jsmin.html>`_. The default is ``False``.
 
+
+.. _static_media_js_compression_cmd:
+
+STATIC_MEDIA_JS_COMPRESSION_CMD
+===============================
+
+Which external javascript compression command to use. The command string can use ``%(outfile)s`` and ``%(infile)s`` placeholders. If the value is ``None`` then the internal ``jsmin`` library is used when :ref:`STATIC_MEDIA_COMPRESS_JS` is ``True``. The default is ``None`` (Use the internal compression)
+
+
 .. _static_media_app_media_path:
 
 STATIC_MEDIA_APP_MEDIA_PATH

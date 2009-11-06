@@ -95,3 +95,6 @@ STATIC_MEDIA_COPY_PATHS = (
 )
 
 STATIC_MEDIA_APP_MEDIA_PATH = os.path.join(APP, 'media2')
+STATIC_MEDIA_COMPRESS_JS = True
+STATIC_MEDIA_COMPRESS_CSS = True
+STATIC_MEDIA_JS_COMPRESSION_CMD = 'java -jar ~/compiler-latest/compiler.jar --js %(infile)s --js_output_file %(outfile)s'

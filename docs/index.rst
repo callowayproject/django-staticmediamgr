@@ -15,6 +15,7 @@ Contents:
    getting_started
    settings
    css_compression
+   js_compression
    management_commands
    app_media
    reference/*
