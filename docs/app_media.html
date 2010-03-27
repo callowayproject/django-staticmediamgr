@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Media &mdash; Static Media Manager v0.4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Static Media Manager v0.4 documentation" href="index.html" />
+    <link rel="next" title="Utilities Reference" href="reference/utils.html" />
+    <link rel="prev" title="Management Commands" href="management_commands.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Static Media Manager v0.4 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Application Media</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="reference/utils.html" title="Utilities Reference" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="management_commands.html" title="Management Commands" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference external" href="css_compression.html">CSS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="js_compression.html">JS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="management_commands.html">Management Commands</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">Application Media</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#manual-copying">Manual Copying</a></li>
+<li class="toctree-l2"><a class="reference external" href="#automatic-copying">Automatic Copying</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="reference/utils.html">Utilities Reference</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/app_media.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="application-media">
+<span id="app-media"></span><h1>Application Media<a class="headerlink" href="#application-media" title="Permalink to this headline">¶</a></h1>
+<p>There are two ways to handle application media: manual and automatic.</p>
+<div class="section" id="manual-copying">
+<h2>Manual Copying<a class="headerlink" href="#manual-copying" title="Permalink to this headline">¶</a></h2>
+<p>The manual method is where you add an entry for each application in <a class="reference external" href="settings.html#static-media-copy-paths"><em>STATIC_MEDIA_COPY_PATHS</em></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_MEDIA_COPY_PATHS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_ROOT</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;/mnt/mediaserver/media/&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="s">&#39;apps/coolapp/media/&#39;</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;/mnt/mediaserver/media/&#39;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This gives you some control over where each application&#8217;s media files are stored.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the application&#8217;s media files are not in a directory named <tt class="docutils literal"><span class="pre">media</span></tt>, then this is the only way you can copy the application&#8217;s media files.</p>
+</div>
+</div>
+<div class="section" id="automatic-copying">
+<h2>Automatic Copying<a class="headerlink" href="#automatic-copying" title="Permalink to this headline">¶</a></h2>
+<p>The automatic copying of application media consists of searching for a directory named <tt class="docutils literal"><span class="pre">media</span></tt> in each installed application, with the exception of django contrib applications, and copying the contents to <a class="reference external" href="settings.html#static-media-app-media-path"><em>STATIC_MEDIA_APP_MEDIA_PATH</em></a>.</p>
+<div class="section" id="overriding-application-media-files">
+<h3>Overriding Application Media Files<a class="headerlink" href="#overriding-application-media-files" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you might want to replace one or more of an existing application&#8217;s media files with one of your own. This is easy to do. Simply put the file(s) in the <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> directory with the same relative path as the application&#8217;s media.</p>
+<p>For example, if an application had a structure</p>
+<div class="highlight-python"><pre>coolapp/
+  admin.py
+  media/
+    coolapp/
+      css/
+        base.css
+        forms.css
+      img/
+        logo.png
+  models.py
+  templates/
+  urls.py</pre>
+</div>
+<p>You would override the <tt class="docutils literal"><span class="pre">base.css</span></tt> file by putting your file</p>
+<div class="highlight-python"><pre>media/
+  css/
+  img/
+  js/
+  coolapp/
+    css/
+      base.css</pre>
+</div>
+<p>During the copying process, your existing file(s) will <strong>not</strong> be overwritten.</p>
+<p>By default, automatic copying is turned on. The <a class="reference external" href="settings.html#static-media-app-media-path"><em>STATIC_MEDIA_APP_MEDIA_PATH</em></a> setting is <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt>. Turn off automatic copying by setting <a class="reference external" href="settings.html#static-media-app-media-path"><em>STATIC_MEDIA_APP_MEDIA_PATH</em></a> to <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Application Media
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

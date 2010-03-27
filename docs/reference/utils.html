@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Utilities Reference &mdash; Static Media Manager v0.4 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Static Media Manager v0.4 documentation" href="../index.html" />
+    <link rel="prev" title="Application Media" href="../app_media.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Static Media Manager v0.4 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Utilities Reference</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="../app_media.html" title="Application Media" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference external" href="../settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference external" href="../css_compression.html">CSS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="../js_compression.html">JS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="../management_commands.html">Management Commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="../app_media.html">Application Media</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">Utilities Reference</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="../_sources/reference/utils.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-staticmediamgr.utils">
+<h1>Utilities Reference<a class="headerlink" href="#module-staticmediamgr.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="staticmediamgr.utils.combine_files">
+<tt class="descclassname">staticmediamgr.utils.</tt><tt class="descname">combine_files</tt><big>(</big><em>destination</em>, <em>path_list</em><big>)</big><a class="headerlink" href="#staticmediamgr.utils.combine_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine the files in <tt class="docutils literal"><span class="pre">path_list</span></tt> to create one file at <tt class="docutils literal"><span class="pre">destination</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>destination</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The full file path of the resulting file</li>
+<li><em>path_list</em> (<tt class="docutils literal"><span class="pre">list</span></tt>) &#8211; A list of full file paths that should be combined</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="staticmediamgr.utils.compress_copy">
+<tt class="descclassname">staticmediamgr.utils.</tt><tt class="descname">compress_copy</tt><big>(</big><em>src</em>, <em>dst</em>, <em>replace_files=True</em>, <em>compress_css=True</em>, <em>compress_js=True</em><big>)</big><a class="headerlink" href="#staticmediamgr.utils.compress_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around <tt class="docutils literal"><span class="pre">shutil.copy2</span></tt> to optionally compress javascript or css
+files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>src</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The path to the original file/directory</li>
+<li><em>dst</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The path to the destination file/directory</li>
+<li><em>compress_css</em> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; Should CSS files be compressed. <strong>Default:</strong> False</li>
+<li><em>compress_js</em> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; Should javascript files be compressed. <strong>Default:</strong> False</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="staticmediamgr.utils.copy">
+<tt class="descclassname">staticmediamgr.utils.</tt><tt class="descname">copy</tt><big>(</big><em>original</em>, <em>destination</em>, <em>purge=True</em>, <em>replace_files=True</em><big>)</big><a class="headerlink" href="#staticmediamgr.utils.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do the file copying with all the appropriate error checking. Don&#8217;t replace 
+an existing file if <tt class="docutils literal"><span class="pre">replace_files</span></tt> is <tt class="xref docutils literal"><span class="pre">False</span></tt></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>original</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The path to the original file/directory</li>
+<li><em>destination</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The path to the destination file/directory</li>
+<li><em>purge</em> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; Should directories be emptied before copying. <strong>Default:</strong> <tt class="docutils literal"><span class="pre">settings.PURGE_OLD_FILES</span></tt></li>
+<li><em>replace_files</em> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; Should existing files be over-written (<tt class="xref docutils literal"><span class="pre">True</span></tt>) or kept (<tt class="xref docutils literal"><span class="pre">False</span></tt>). 
+Whole directories will <em>not</em> be over-written. Each file within a directory
+will be evaluated. <strong>Default:</strong> <tt class="xref docutils literal"><span class="pre">True</span></tt></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="staticmediamgr.utils.copy_app_media">
+<tt class="descclassname">staticmediamgr.utils.</tt><tt class="descname">copy_app_media</tt><big>(</big><em>destination='/Users/coordt/Projects/django-staticmediamgr/media2'</em><big>)</big><a class="headerlink" href="#staticmediamgr.utils.copy_app_media" title="Permalink to this definition">¶</a></dt>
+<dd>Copy each application&#8217;s media files to the path specified in 
+<tt class="docutils literal"><span class="pre">STATIC_MEDIA_APP_MEDIA_PATH</span></tt>. Won&#8217;t do any of the django.contrib 
+applications.</dd></dl>
+
+<dl class="function">
+<dt id="staticmediamgr.utils.copydir">
+<tt class="descclassname">staticmediamgr.utils.</tt><tt class="descname">copydir</tt><big>(</big><em>src</em>, <em>dst</em>, <em>replace_files=True</em><big>)</big><a class="headerlink" href="#staticmediamgr.utils.copydir" title="Permalink to this definition">¶</a></dt>
+<dd><p>A port of the recursive shutil.copytree, except it assumes the 
+destination directory exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>src</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The path to the original file/directory</li>
+<li><em>dst</em> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; The path to the destination file/directory</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Utilities Reference
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; Static Media Manager v0.4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Static Media Manager v0.4 documentation" href="index.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Welcome to Static Media Manager’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Static Media Manager v0.4 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Getting Started</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="index.html" title="Welcome to Static Media Manager’s documentation!" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1 current"><a class="current reference external" href="">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference external" href="#local-development-vs-production">Local Development vs. Production</a></li>
+<li class="toctree-l2"><a class="reference external" href="#using-static-media-manager">Using Static Media Manager</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference external" href="css_compression.html">CSS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="js_compression.html">JS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="management_commands.html">Management Commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="app_media.html">Application Media</a></li>
+<li class="toctree-l1"><a class="reference external" href="reference/utils.html">Utilities Reference</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/getting_started.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first"><strong>Install the package.</strong></p>
+<p><strong>From Source Checkout</strong>:</p>
+<div class="highlight-python"><pre>git clone http://opensource.washingtontimes.com/git/public/django-staticmediamgr.git/
+cd django-staticmediamgr
+python setup.py install</pre>
+</div>
+<p><strong>From PyPI</strong>:</p>
+<div class="highlight-python"><pre>**Comming soon**</pre>
+</div>
+</li>
+<li><p class="first"><strong>Add to INSTALLED_APPS.</strong> In your projects <tt class="docutils literal"><span class="pre">settings.py</span></tt> file, add <tt class="docutils literal"><span class="pre">staticmediamgr</span></tt> to <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>.</p>
+</li>
+<li><p class="first"><strong>Configure Settings.</strong> In <tt class="docutils literal"><span class="pre">settings.py</span></tt> or <tt class="docutils literal"><span class="pre">local_settings.py</span></tt> configure at least <a class="reference external" href="settings.html#static-media-copy-paths"><em>STATIC_MEDIA_COPY_PATHS</em></a> and possibly <a class="reference external" href="settings.html#static-media-compress-css"><em>STATIC_MEDIA_COMPRESS_CSS</em></a> and <a class="reference external" href="settings.html#static-media-compress-js"><em>STATIC_MEDIA_COMPRESS_JS</em></a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="local-development-vs-production">
+<h2>Local Development vs. Production<a class="headerlink" href="#local-development-vs-production" title="Permalink to this headline">¶</a></h2>
+<p>For local development, assuming you are using a <tt class="docutils literal"><span class="pre">local_settings.py</span></tt> file, set your <a class="reference external" href="settings.html#static-media-copy-paths"><em>STATIC_MEDIA_COPY_PATHS</em></a> to a path that is not versioned with version control. Then configure django to serve media from that directory.</p>
+<p>In <tt class="docutils literal"><span class="pre">local_settings.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_MEDIA_COPY_PATHS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="s">&#39;media&#39;</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;media2&#39;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Then in <tt class="docutils literal"><span class="pre">urls.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s">r&#39;^media/(?P&lt;path&gt;.*)$&#39;</span><span class="p">,</span> <span class="s">&#39;django.views.static.serve&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">&#39;document_root&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basedir</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;media2&#39;</span><span class="p">)}),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-static-media-manager">
+<h2>Using Static Media Manager<a class="headerlink" href="#using-static-media-manager" title="Permalink to this headline">¶</a></h2>
+<p>Static Media Manager creates a management command <tt class="docutils literal"><span class="pre">copy_static_media</span></tt>. To copy all your static media simply:</p>
+<div class="highlight-python"><pre>./manage.py copy_static_media</pre>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Getting Started
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

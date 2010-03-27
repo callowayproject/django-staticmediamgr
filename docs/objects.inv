@@ -1,0 +1,9 @@
+# Sphinx inventory version 1
+# Project: Static Media Manager
+# Version: 0.4
+staticmediamgr.utils mod reference/utils.html
+staticmediamgr.utils.copy_app_media function reference/utils.html
+staticmediamgr.utils.copy function reference/utils.html
+staticmediamgr.utils.compress_copy function reference/utils.html
+staticmediamgr.utils.combine_files function reference/utils.html
+staticmediamgr.utils.copydir function reference/utils.html
