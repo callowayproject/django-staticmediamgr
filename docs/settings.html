@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Settings &mdash; Static Media Manager v0.4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Static Media Manager v0.4 documentation" href="index.html" />
+    <link rel="next" title="CSS Compression" href="css_compression.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Static Media Manager v0.4 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Settings</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="css_compression.html" title="CSS Compression" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="getting_started.html" title="Getting Started" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">Settings</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#static-media-copy-paths">STATIC_MEDIA_COPY_PATHS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-purge-old-files">STATIC_MEDIA_PURGE_OLD_FILES</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-compress-css">STATIC_MEDIA_COMPRESS_CSS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-compress-js">STATIC_MEDIA_COMPRESS_JS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-js-compression-cmd">STATIC_MEDIA_JS_COMPRESSION_CMD</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-app-media-path">STATIC_MEDIA_APP_MEDIA_PATH</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-file-combinations">STATIC_MEDIA_FILE_COMBINATIONS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="css_compression.html">CSS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="js_compression.html">JS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="management_commands.html">Management Commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="app_media.html">Application Media</a></li>
+<li class="toctree-l1"><a class="reference external" href="reference/utils.html">Utilities Reference</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/settings.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="settings">
+<span id="id1"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="static-media-copy-paths">
+<span id="id2"></span><h2>STATIC_MEDIA_COPY_PATHS<a class="headerlink" href="#static-media-copy-paths" title="Permalink to this headline">¶</a></h2>
+<p>The configuration of which path(s) should be copied where. It consists of a tuple of dicts. Each dict requires a <tt class="docutils literal"><span class="pre">from</span></tt> key and a <tt class="docutils literal"><span class="pre">to</span></tt> key.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_MEDIA_COPY_PATHS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="n">MEDIA_ROOT</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;/mnt/MediaServer/media/&#39;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If you are copying everything from your <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt>, the above configuration would suffice. You can get more specific, as well.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_MEDIA_COPY_PATHS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/css/&#39;</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;/mnt/MediaServer/media/css/&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/js/&#39;</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;/mnt/MediaServer2/media/js/&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/img/&#39;</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;/mnt/MediaServer3/media/img/&#39;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The string in the <tt class="docutils literal"><span class="pre">from</span></tt> entry can be relative to the project path, or absolute. It can point to a file or a directory.</p>
+</div>
+<div class="section" id="static-media-purge-old-files">
+<span id="id3"></span><h2>STATIC_MEDIA_PURGE_OLD_FILES<a class="headerlink" href="#static-media-purge-old-files" title="Permalink to this headline">¶</a></h2>
+<p>When copying a directory, should the directory at the new location be emptied first (<tt class="xref docutils literal"><span class="pre">True</span></tt>) or left as-is (<tt class="xref docutils literal"><span class="pre">False</span></tt>). The default is <tt class="xref docutils literal"><span class="pre">True</span></tt>.</p>
+</div>
+<div class="section" id="static-media-compress-css">
+<span id="id4"></span><h2>STATIC_MEDIA_COMPRESS_CSS<a class="headerlink" href="#static-media-compress-css" title="Permalink to this headline">¶</a></h2>
+<p>Should CSS files be compressed using a port of the <a class="reference external" href="http://developer.yahoo.com/yui/compressor/">YUI Compressor</a> when copied (<tt class="xref docutils literal"><span class="pre">True</span></tt>) or left as-is (<tt class="xref docutils literal"><span class="pre">False</span></tt>). The default is <tt class="xref docutils literal"><span class="pre">False</span></tt>.</p>
+<p>The compression simply removes excess whitespace and comments and shortens colors and zero measurements. It does not alter any rules or combine any rule attributes. See <a class="reference external" href="css_compression.html#css-compression"><em>CSS Compression</em></a> for more detailed information.</p>
+</div>
+<div class="section" id="static-media-compress-js">
+<span id="id5"></span><h2>STATIC_MEDIA_COMPRESS_JS<a class="headerlink" href="#static-media-compress-js" title="Permalink to this headline">¶</a></h2>
+<p>Should Javascript files be compressed using a port of Douglas Crockford&#8217;s <a class="reference external" href="http://www.crockford.com/javascript/jsmin.html">jsmin</a>. The default is <tt class="xref docutils literal"><span class="pre">False</span></tt>.</p>
+</div>
+<div class="section" id="static-media-js-compression-cmd">
+<span id="id6"></span><h2>STATIC_MEDIA_JS_COMPRESSION_CMD<a class="headerlink" href="#static-media-js-compression-cmd" title="Permalink to this headline">¶</a></h2>
+<p>Which external javascript compression command to use. The command string can use <tt class="docutils literal"><span class="pre">%(outfile)s</span></tt> and <tt class="docutils literal"><span class="pre">%(infile)s</span></tt> placeholders. If the value is <tt class="xref docutils literal"><span class="pre">None</span></tt> then the internal <tt class="docutils literal"><span class="pre">jsmin</span></tt> library is used when <a class="reference internal" href="#static-media-compress-js"><em>STATIC_MEDIA_COMPRESS_JS</em></a> is <tt class="xref docutils literal"><span class="pre">True</span></tt>. The default is <tt class="xref docutils literal"><span class="pre">None</span></tt> (Use the internal compression)</p>
+</div>
+<div class="section" id="static-media-app-media-path">
+<span id="id7"></span><h2>STATIC_MEDIA_APP_MEDIA_PATH<a class="headerlink" href="#static-media-app-media-path" title="Permalink to this headline">¶</a></h2>
+<p>Where should the contents of the media directory inside each entry in <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> be installed? If the value is <tt class="xref docutils literal"><span class="pre">None</span></tt> then application media will not be copied. The default is <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt>.</p>
+<p>Application media will not overwrite existing files, so it is possible for you to override one, several or all of the files in a given application&#8217;s media.</p>
+</div>
+<div class="section" id="static-media-file-combinations">
+<span id="id8"></span><h2>STATIC_MEDIA_FILE_COMBINATIONS<a class="headerlink" href="#static-media-file-combinations" title="Permalink to this headline">¶</a></h2>
+<p>A dictionary mapping a (new) file to a combination/concatenation of several other files. The concatenation is done in the order of the list. The resulting file will be compressed according to the <tt class="xref docutils literal"><span class="pre">COMPRESS_CSS</span></tt> and <tt class="xref docutils literal"><span class="pre">COMPRESS_JS</span></tt> settings.</p>
+<p>For example, to combine three CSS files into one <tt class="docutils literal"><span class="pre">combo.css</span></tt> file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_MEDIA_FILE_COMBINATIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/css/combo.css&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/css/base.css&#39;</span><span class="p">,</span>
+        <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/css/forms.css&#39;</span><span class="p">,</span>
+        <span class="n">MEDIA_ROOT</span><span class="o">+</span><span class="s">&#39;/css/coolui.css&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">File combinations are done before anything else, so make the destination path for combination files be in a directory configured in a <tt class="docutils literal"><span class="pre">from</span></tt> key in <a class="reference internal" href="#static-media-copy-paths"><em>STATIC_MEDIA_COPY_PATHS</em></a>.</p>
+</div>
+<p>The original files are not touched and the destination file can safely reside with them. The default setting is an empty dictionary.</p>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Settings
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CSS Compression &mdash; Static Media Manager v0.4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Static Media Manager v0.4 documentation" href="index.html" />
+    <link rel="next" title="JS Compression" href="js_compression.html" />
+    <link rel="prev" title="Settings" href="settings.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Static Media Manager v0.4 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>CSS Compression</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="js_compression.html" title="JS Compression" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">CSS Compression</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#remove-comments"><tt class="docutils literal"><span class="pre">remove_comments</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#normalize-whitespace"><tt class="docutils literal"><span class="pre">normalize_whitespace</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#convert-boxmodelhack"><tt class="docutils literal"><span class="pre">convert_boxmodelhack</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#restore-boxmodelhack"><tt class="docutils literal"><span class="pre">restore_boxmodelhack</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#remove-extra-spaces"><tt class="docutils literal"><span class="pre">remove_extra_spaces</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#add-missing-semicolon"><tt class="docutils literal"><span class="pre">add_missing_semicolon</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#minify-zeros"><tt class="docutils literal"><span class="pre">minify_zeros</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#shorten-colors"><tt class="docutils literal"><span class="pre">shorten_colors</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#remove-empty-rules"><tt class="docutils literal"><span class="pre">remove_empty_rules</span></tt></a></li>
+<li class="toctree-l2"><a class="reference external" href="#replace-multiple-semicolons"><tt class="docutils literal"><span class="pre">replace_multiple_semicolons</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="js_compression.html">JS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="management_commands.html">Management Commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="app_media.html">Application Media</a></li>
+<li class="toctree-l1"><a class="reference external" href="reference/utils.html">Utilities Reference</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/css_compression.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="css-compression">
+<span id="id1"></span><h1>CSS Compression<a class="headerlink" href="#css-compression" title="Permalink to this headline">¶</a></h1>
+<p>The CSS compression used was ported over from <a class="reference external" href="http://developer.yahoo.com/yui/compressor/">YUI Compressor</a>. It is available separately at <a class="reference external" href="http://github.com/coordt/csscompressor">github</a>.</p>
+<p>Each part of the compression is separated and could technically be turned off, although there is no configuration mechanism for that currently. Some of the regular expressions could fail if other parts are turned off as they may assume that a previous filter has already ran. For example, some of the filters <em>may</em> assume the <tt class="docutils literal"><span class="pre">normalize_whitespace</span></tt> filter has ran and not look for multiple spacing options.</p>
+<div class="section" id="remove-comments">
+<h2><tt class="docutils literal"><span class="pre">remove_comments</span></tt><a class="headerlink" href="#remove-comments" title="Permalink to this headline">¶</a></h2>
+<p>Removes multi-line (<tt class="docutils literal"><span class="pre">/*</span> <span class="pre">...</span> <span class="pre">*/</span></tt>) and single line (<tt class="docutils literal"><span class="pre">//</span> <span class="pre">...</span></tt>) comments.</p>
+</div>
+<div class="section" id="normalize-whitespace">
+<h2><tt class="docutils literal"><span class="pre">normalize_whitespace</span></tt><a class="headerlink" href="#normalize-whitespace" title="Permalink to this headline">¶</a></h2>
+<p>Convert all whitespace, including line endings, to a single space. This makes manipulation a bit easier.</p>
+</div>
+<div class="section" id="convert-boxmodelhack">
+<h2><tt class="docutils literal"><span class="pre">convert_boxmodelhack</span></tt><a class="headerlink" href="#convert-boxmodelhack" title="Permalink to this headline">¶</a></h2>
+<p>Make a pseudo class for the <a class="reference external" href="http://tantek.com/CSS/Examples/boxmodelhack.html">Box Model Hack</a> that is sometimes used to make Internet Explorer work right. The hack itself could be destroyed by some of the filters, so this filter replaces it with <tt class="docutils literal"><span class="pre">___PSEUDOCLASSBMH___</span></tt> so it can be restore later.</p>
+</div>
+<div class="section" id="restore-boxmodelhack">
+<h2><tt class="docutils literal"><span class="pre">restore_boxmodelhack</span></tt><a class="headerlink" href="#restore-boxmodelhack" title="Permalink to this headline">¶</a></h2>
+<p>Undo what was done with the <tt class="docutils literal"><span class="pre">convert_boxmodelhack</span></tt>.</p>
+</div>
+<div class="section" id="remove-extra-spaces">
+<h2><tt class="docutils literal"><span class="pre">remove_extra_spaces</span></tt><a class="headerlink" href="#remove-extra-spaces" title="Permalink to this headline">¶</a></h2>
+<p>Remove the spaces before the things that should not have spaces before them. But, be careful not to turn <tt class="docutils literal"><span class="pre">p</span> <span class="pre">:link</span> <span class="pre">{...}</span></tt> into <tt class="docutils literal"><span class="pre">p:link{...}</span></tt>. Swap out any pseudo-class colons with the token, and then swap back.</p>
+</div>
+<div class="section" id="add-missing-semicolon">
+<h2><tt class="docutils literal"><span class="pre">add_missing_semicolon</span></tt><a class="headerlink" href="#add-missing-semicolon" title="Permalink to this headline">¶</a></h2>
+<p>Add a semicolon before any <tt class="docutils literal"><span class="pre">}</span></tt> if it is missing.</p>
+</div>
+<div class="section" id="minify-zeros">
+<h2><tt class="docutils literal"><span class="pre">minify_zeros</span></tt><a class="headerlink" href="#minify-zeros" title="Permalink to this headline">¶</a></h2>
+<p>This filter does several things. First it strips out any measurement unit after a 0, so <tt class="docutils literal"><span class="pre">0px</span></tt> becomes <tt class="docutils literal"><span class="pre">0</span></tt>. Then it converts measurements with multiple dimensions of zero to just one zero, so <tt class="docutils literal"><span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span></tt> becomes <tt class="docutils literal"><span class="pre">0</span></tt>.
+Finally it strips the leading zero from decimal measurements between zero and one, so <tt class="docutils literal"><span class="pre">0.6</span></tt> becomes <tt class="docutils literal"><span class="pre">.6</span></tt>.</p>
+</div>
+<div class="section" id="shorten-colors">
+<h2><tt class="docutils literal"><span class="pre">shorten_colors</span></tt><a class="headerlink" href="#shorten-colors" title="Permalink to this headline">¶</a></h2>
+<p>There are two parts to this filter. The first part converts colors specified using <tt class="docutils literal"><span class="pre">rgb(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></tt> notation to hex notation (<tt class="docutils literal"><span class="pre">#000000</span></tt>).</p>
+<p>Next the hex colors are reduced from six characters to three characters if each pair of characters is the same (<tt class="docutils literal"><span class="pre">#aabbcc</span></tt> becomes <tt class="docutils literal"><span class="pre">#abc</span></tt>).</p>
+</div>
+<div class="section" id="remove-empty-rules">
+<h2><tt class="docutils literal"><span class="pre">remove_empty_rules</span></tt><a class="headerlink" href="#remove-empty-rules" title="Permalink to this headline">¶</a></h2>
+<p>Remove any empty rules, such as <tt class="docutils literal"><span class="pre">p</span> <span class="pre">{</span> <span class="pre">}</span></tt>.</p>
+</div>
+<div class="section" id="replace-multiple-semicolons">
+<h2><tt class="docutils literal"><span class="pre">replace_multiple_semicolons</span></tt><a class="headerlink" href="#replace-multiple-semicolons" title="Permalink to this headline">¶</a></h2>
+<p>Convert multiple semicolons in a row with just one.</p>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		CSS Compression
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

@@ -91,6 +91,7 @@ INSTALLED_APPS = (
 )
 
 STATIC_MEDIA_COPY_PATHS = (
+    {'from': os.path.join(APP, 'sample','media2'), 'to':os.path.join(APP, 'media2')},
     {'from': MEDIA_ROOT, 'to':os.path.join(APP, 'media2')},
 )
 

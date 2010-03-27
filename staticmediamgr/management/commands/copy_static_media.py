@@ -24,7 +24,14 @@ class Command(BaseCommand):
         self.options = kwargs
         for key, val in sm_settings.FILE_COMBINATIONS.items():
             combine_files(key, val)
+        if self.options['purge'] or sm_settings.PURGE_OLD_FILES:
+            for configitem in sm_settings.COPY_PATHS:
+                try:
+                    shutil.rmtree(configitem['to'])
+                    os.makedirs(configitem['to'])
+                except OSError:
+                    pass # Probably trying to remove the same destination twice
         for configitem in sm_settings.COPY_PATHS:
             for item in glob.iglob(configitem['from']):
-                utils.copy(item, configitem['to'], self.options['purge'])
+                utils.copy(item, configitem['to'], purge=False)
         utils.copy_app_media()
