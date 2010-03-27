@@ -2,7 +2,9 @@
 Django-StaticMediaMgr
 =====================
 
-**New in this version:** Ability to combine multiple files into a new file before copying and/or compressing them.
+**New in version 0.3:** Fixed a bug where copying multiple directories into the same directory with the purge options would only allow the last copy to work. Now multiple source directories can be copied into one destination, with each successive copy potentially overwriting the previous files.
+
+**New in version 0.2:** Ability to combine multiple files into a new file before copying and/or compressing them.
 
 This app provides a way to copy and consolidate static media files to one or more configured locations. This is incredibly helpful if you have your media served from another server.
 
