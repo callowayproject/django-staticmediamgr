@@ -158,6 +158,7 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
         mod = importlib.import_module(app)
         app_media_path = os.path.join(os.path.abspath(mod.__path__[0]), 'media')
         if os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
+            print "Copying %s's media to %s" % (app, destination)
             copy(app_media_path, destination, purge=False, replace_files=False)
 
 
