@@ -123,7 +123,7 @@ python setup.py install</pre>
 <p>Then in <tt class="docutils literal"><span class="pre">urls.py</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
     <span class="p">(</span><span class="s">r&#39;^media/(?P&lt;path&gt;.*)$&#39;</span><span class="p">,</span> <span class="s">&#39;django.views.static.serve&#39;</span><span class="p">,</span>
-        <span class="p">{</span><span class="s">&#39;document_root&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basedir</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;media2&#39;</span><span class="p">)}),</span>
+        <span class="p">{</span><span class="s">&#39;document_root&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;media2&#39;</span><span class="p">)}),</span>
 <span class="p">)</span>
 </pre></div>
 </div>

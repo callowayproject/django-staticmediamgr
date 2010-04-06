@@ -53,6 +53,7 @@
 <li class="toctree-l2"><a class="reference external" href="#static-media-js-compression-cmd">STATIC_MEDIA_JS_COMPRESSION_CMD</a></li>
 <li class="toctree-l2"><a class="reference external" href="#static-media-app-media-path">STATIC_MEDIA_APP_MEDIA_PATH</a></li>
 <li class="toctree-l2"><a class="reference external" href="#static-media-file-combinations">STATIC_MEDIA_FILE_COMBINATIONS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-url">STATIC_URL</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="css_compression.html">CSS Compression</a></li>
@@ -153,6 +154,11 @@
 <p class="last">File combinations are done before anything else, so make the destination path for combination files be in a directory configured in a <tt class="docutils literal"><span class="pre">from</span></tt> key in <a class="reference internal" href="#static-media-copy-paths"><em>STATIC_MEDIA_COPY_PATHS</em></a>.</p>
 </div>
 <p>The original files are not touched and the destination file can safely reside with them. The default setting is an empty dictionary.</p>
+</div>
+<div class="section" id="static-url">
+<span id="id9"></span><h2>STATIC_URL<a class="headerlink" href="#static-url" title="Permalink to this headline">¶</a></h2>
+<p>In order to segregate user uploaded content from the site content, you can use the <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> and the static url <tt class="docutils literal"><span class="pre">staticmediamgr.context_processor.static_url</span></tt> to keep things separate.</p>
+<p>The default is <tt class="docutils literal"><span class="pre">STATIC_URL</span> <span class="pre">=</span> <span class="pre">MEDIA_URL</span></tt></p>
 </div>
 </div>
 

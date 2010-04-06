@@ -90,3 +90,13 @@ For example, to combine three CSS files into one ``combo.css`` file::
    File combinations are done before anything else, so make the destination path for combination files be in a directory configured in a ``from`` key in :ref:`STATIC_MEDIA_COPY_PATHS`.
 
 The original files are not touched and the destination file can safely reside with them. The default setting is an empty dictionary.
+
+.. _static_url:
+
+STATIC_URL
+==========
+
+In order to segregate user uploaded content from the site content, you can use the ``STATIC_URL`` and the static url ``staticmediamgr.context_processor.static_url`` to keep things separate.
+
+The default is ``STATIC_URL = MEDIA_URL``
+
