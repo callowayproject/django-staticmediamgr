@@ -39,7 +39,7 @@ Then in ``urls.py``\ : ::
 
 	urlpatterns += patterns('',
 	    (r'^media/(?P<path>.*)$', 'django.views.static.serve', 
-	        {'document_root': os.path.join(os.path.basedir(__file__), 'media2')}),
+	        {'document_root': os.path.join(os.path.dirname(__file__), 'media2')}),
 	)
 
 

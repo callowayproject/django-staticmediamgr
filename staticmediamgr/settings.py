@@ -69,3 +69,10 @@ COMPRESS_IMG_CMDS = getattr(settings, 'STATIC_MEDIA_COMPRESS_IMG_CMDS', {})
 #:     }
 #: **Default:** ``{}``
 FILE_COMBINATIONS = getattr(settings, 'STATIC_MEDIA_FILE_COMBINATIONS', {})
+
+#: In order to segregate user uploaded content from the site content, you can
+#: use the ``STATIC_URL`` and the static url ``staticmediamgr.context_processor.static_url``
+#: to keep things separate.
+#: 
+#: **Default:** STATIC_URL = MEDIA_URL
+STATIC_URL = getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
