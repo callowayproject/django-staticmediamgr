@@ -153,7 +153,7 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
     if destination is None:
         return
     for app in global_settings.INSTALLED_APPS:
-        if 'django.contrib' in app:
+        if app in settings.EXCLUDE_APPS:
             continue
         mod = importlib.import_module(app)
         app_media_path = os.path.join(os.path.abspath(mod.__path__[0]), 'media')

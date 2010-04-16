@@ -42,6 +42,12 @@ JS_COMPRESSION_CMD = getattr(settings, 'STATIC_MEDIA_JS_COMPRESSION_CMD', None)
 #: **Default:** ``settings.MEDIA_ROOT``
 APP_MEDIA_PATH = getattr(settings, 'STATIC_MEDIA_APP_MEDIA_PATH', settings.MEDIA_ROOT)
 
+#: List of apps to exclude when copying media to ``APP_MEDIA_PATH``\ . Needs to
+#: match the name as listed in ``INSTALLED_APPS``\ .
+#: 
+#: **Default:** ``()``
+EXCLUDE_APPS = getattr(settings, 'STATIC_MEDIA_EXCLUDE_APPS', tuple())
+
 #: A dictionary mapping of extension to compression command. Each command string
 #: can use ``%(outfile)s`` and ``%(infile)s`` placeholders.
 #:
