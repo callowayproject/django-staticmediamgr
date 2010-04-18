@@ -52,6 +52,8 @@
 <li class="toctree-l2"><a class="reference external" href="#static-media-compress-js">STATIC_MEDIA_COMPRESS_JS</a></li>
 <li class="toctree-l2"><a class="reference external" href="#static-media-js-compression-cmd">STATIC_MEDIA_JS_COMPRESSION_CMD</a></li>
 <li class="toctree-l2"><a class="reference external" href="#static-media-app-media-path">STATIC_MEDIA_APP_MEDIA_PATH</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-exclude-apps">STATIC_MEDIA_EXCLUDE_APPS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#static-media-django-admin-dir-name">STATIC_MEDIA_DJANGO_ADMIN_DIR_NAME</a></li>
 <li class="toctree-l2"><a class="reference external" href="#static-media-file-combinations">STATIC_MEDIA_FILE_COMBINATIONS</a></li>
 <li class="toctree-l2"><a class="reference external" href="#static-url">STATIC_URL</a></li>
 </ul>
@@ -137,8 +139,18 @@
 <p>Where should the contents of the media directory inside each entry in <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> be installed? If the value is <tt class="xref docutils literal"><span class="pre">None</span></tt> then application media will not be copied. The default is <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt>.</p>
 <p>Application media will not overwrite existing files, so it is possible for you to override one, several or all of the files in a given application&#8217;s media.</p>
 </div>
+<div class="section" id="static-media-exclude-apps">
+<span id="id8"></span><h2>STATIC_MEDIA_EXCLUDE_APPS<a class="headerlink" href="#static-media-exclude-apps" title="Permalink to this headline">¶</a></h2>
+<p>List of apps to exclude when copying media to <tt class="docutils literal"><span class="pre">APP_MEDIA_PATH</span></tt>. Needs to match the name as listed in <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>.</p>
+</div>
+<div class="section" id="static-media-django-admin-dir-name">
+<span id="id9"></span><h2>STATIC_MEDIA_DJANGO_ADMIN_DIR_NAME<a class="headerlink" href="#static-media-django-admin-dir-name" title="Permalink to this headline">¶</a></h2>
+<p>The media for Django&#8217;s <tt class="docutils literal"><span class="pre">contrib.admin</span></tt> application doesn&#8217;t follow the de facto standard of enclosing an app&#8217;s media within a directory of the app&#8217;s name; its css files are in <tt class="docutils literal"><span class="pre">css</span></tt>, its images are in <tt class="docutils literal"><span class="pre">img</span></tt>, etc.</p>
+<p>To avoid potential conflicts with other media, this setting allows you to add the admin media into a directory within your <tt class="docutils literal"><span class="pre">STATIC_MEDIA_APP_MEDIA_PATH</span></tt>. By default, it is <tt class="docutils literal"><span class="pre">admin-media</span></tt>.</p>
+<p>Make sure you set your ADMIN_MEDIA_PREFIX to <tt class="docutils literal"><span class="pre">/admin-media/</span></tt> or whatever else you set this to.</p>
+</div>
 <div class="section" id="static-media-file-combinations">
-<span id="id8"></span><h2>STATIC_MEDIA_FILE_COMBINATIONS<a class="headerlink" href="#static-media-file-combinations" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2>STATIC_MEDIA_FILE_COMBINATIONS<a class="headerlink" href="#static-media-file-combinations" title="Permalink to this headline">¶</a></h2>
 <p>A dictionary mapping a (new) file to a combination/concatenation of several other files. The concatenation is done in the order of the list. The resulting file will be compressed according to the <tt class="xref docutils literal"><span class="pre">COMPRESS_CSS</span></tt> and <tt class="xref docutils literal"><span class="pre">COMPRESS_JS</span></tt> settings.</p>
 <p>For example, to combine three CSS files into one <tt class="docutils literal"><span class="pre">combo.css</span></tt> file:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STATIC_MEDIA_FILE_COMBINATIONS</span> <span class="o">=</span> <span class="p">{</span>
@@ -156,7 +168,7 @@
 <p>The original files are not touched and the destination file can safely reside with them. The default setting is an empty dictionary.</p>
 </div>
 <div class="section" id="static-url">
-<span id="id9"></span><h2>STATIC_URL<a class="headerlink" href="#static-url" title="Permalink to this headline">¶</a></h2>
+<span id="id11"></span><h2>STATIC_URL<a class="headerlink" href="#static-url" title="Permalink to this headline">¶</a></h2>
 <p>In order to segregate user uploaded content from the site content, you can use the <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> and the static url <tt class="docutils literal"><span class="pre">staticmediamgr.context_processor.static_url</span></tt> to keep things separate.</p>
 <p>The default is <tt class="docutils literal"><span class="pre">STATIC_URL</span> <span class="pre">=</span> <span class="pre">MEDIA_URL</span></tt></p>
 </div>
