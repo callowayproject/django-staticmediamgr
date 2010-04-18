@@ -70,6 +70,25 @@ Where should the contents of the media directory inside each entry in ``INSTALLE
 Application media will not overwrite existing files, so it is possible for you to override one, several or all of the files in a given application's media.
 
 
+.. _static_media_exclude_apps:
+
+STATIC_MEDIA_EXCLUDE_APPS
+=========================
+
+List of apps to exclude when copying media to ``APP_MEDIA_PATH``\ . Needs to match the name as listed in ``INSTALLED_APPS``\ .
+
+.. _static_media_django_admin_dir_name:
+
+STATIC_MEDIA_DJANGO_ADMIN_DIR_NAME
+==================================
+
+The media for Django's ``contrib.admin`` application doesn't follow the de facto standard of enclosing an app's media within a directory of the app's name; its css files are in ``css``\ , its images are in ``img``\ , etc.
+
+To avoid potential conflicts with other media, this setting allows you to add the admin media into a directory within your ``STATIC_MEDIA_APP_MEDIA_PATH``\ . By default, it is ``admin-media``\ .
+
+Make sure you set your ADMIN_MEDIA_PREFIX to ``/admin-media/`` or whatever else you set this to.
+
+
 .. _static_media_file_combinations:
 
 STATIC_MEDIA_FILE_COMBINATIONS
