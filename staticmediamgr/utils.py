@@ -162,8 +162,10 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
             # Django's contrib.admin doesn't conform to the defacto standard
             # of storing your media in a directory with the app name. Therefore
             # it could easily collide a users media files.
-            destination = os.path.join(destination, settings.DJANGO_ADMIN_DIR_NAME)
-        if os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
+            tmp_dest = os.path.join(destination, settings.DJANGO_ADMIN_DIR_NAME)
+            print "Copying %s's media to %s" % (app, destination)
+            copy(app_media_path, tmp_dest, purge=False, replace_files=False)
+        elif os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
             print "Copying %s's media to %s" % (app, destination)
             copy(app_media_path, destination, purge=False, replace_files=False)
 
