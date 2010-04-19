@@ -27,4 +27,4 @@ class StaticMediaStorage(FileSystemStorage):
     def __init__(self, location='', base_url='', *args, **kwargs):
         real_location = os.path.join(DEFAULT_ROOT, location)
         real_base_url = DEFAULT_URL + base_url
-        super(StaticFileStorage, self).__init__(real_location, real_base_url, *args, **kwargs)
+        super(StaticMediaStorage, self).__init__(real_location, real_base_url, *args, **kwargs)
