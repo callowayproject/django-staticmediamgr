@@ -94,7 +94,8 @@ STATIC_MEDIA_COPY_PATHS = (
     {'from': os.path.join(APP, 'sample','media2'), 'to':os.path.join(APP, 'media2')},
     {'from': MEDIA_ROOT, 'to':os.path.join(APP, 'media2')},
 )
-
+STATIC_ROOT= os.path.join(APP, 'media2')
+STATIC_URL = '/media/'
 STATIC_MEDIA_APP_MEDIA_PATH = os.path.join(APP, 'media2')
 STATIC_MEDIA_COMPRESS_JS = True
 STATIC_MEDIA_COMPRESS_CSS = True

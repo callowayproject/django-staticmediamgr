@@ -27,8 +27,7 @@ Django will still save uploaded files under the ``MEDIA_ROOT`` unless you either
 
 StaticMediaMgr contains a file storage object that defaults to the ``STATIC_ROOT`` and ``STATIC_URL`` settings defined, or else drops back to ``MEDIA_ROOT`` and ``MEDIA_URL``\ . Just add::
 
-	from staticmediamgr.filestorage import StaticMediaStorage
-	DEFAULT_FILE_STORAGE = StaticMediaStorage()
+	DEFAULT_FILE_STORAGE = 'staticmediamgr.storage.StaticMediaStorage'
 
 to your settings to make it the default, or else add it to your ``FileField`` like::
 
