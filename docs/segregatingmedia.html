@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Segregating Your Media from User-uploaded Media &mdash; Static Media Manager v0.4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Static Media Manager v0.4 documentation" href="index.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Static Media Manager v0.4 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Segregating Your Media from User-uploaded Media</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul>
+<li class="toctree-l1"><a class="reference external" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference external" href="css_compression.html">CSS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="js_compression.html">JS Compression</a></li>
+<li class="toctree-l1"><a class="reference external" href="management_commands.html">Management Commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="app_media.html">Application Media</a></li>
+<li class="toctree-l1"><a class="reference external" href="reference/utils.html">Utilities Reference</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/segregatingmedia.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="segregating-your-media-from-user-uploaded-media">
+<h1>Segregating Your Media from User-uploaded Media<a class="headerlink" href="#segregating-your-media-from-user-uploaded-media" title="Permalink to this headline">¶</a></h1>
+<p>By default, Django keeps all static content together. Uploads from ImageFields or FileFields are all stored under the <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> path. <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> is also where it expects to find your static media as well. You may not want this as user-uploaded content could be a security risk. A common practice is to differentiate between the types by adding <tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt> and <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> settings.</p>
+<div class="section" id="template-access">
+<h2>Template Access<a class="headerlink" href="#template-access" title="Permalink to this headline">¶</a></h2>
+<p>A context processor that will give templates access to the <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> setting (defaulting to <tt class="docutils literal"><span class="pre">MEDIA_URL</span></tt>) is available by adding <tt class="docutils literal"><span class="pre">staticmediamgr.context_processor.static_url</span></tt> to the <tt class="docutils literal"><span class="pre">TEMPLATE_CONTEXT_PROCESSORS</span></tt> setting, like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TEMPLATE_CONTEXT_PROCESSORS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&quot;django.contrib.auth.context_processors.auth&quot;</span><span class="p">,</span>
+    <span class="s">&quot;django.core.context_processors.debug&quot;</span><span class="p">,</span>
+    <span class="s">&quot;django.core.context_processors.i18n&quot;</span><span class="p">,</span>
+    <span class="s">&quot;django.core.context_processors.media&quot;</span><span class="p">,</span>
+    <span class="s">&quot;django.contrib.messages.context_processors.messages&quot;</span><span class="p">,</span>
+    <span class="s">&quot;staticmediamgr.context_processor.static_url&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-upload-access">
+<h2>File Upload Access<a class="headerlink" href="#file-upload-access" title="Permalink to this headline">¶</a></h2>
+<p>Django will still save uploaded files under the <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> unless you either change the <tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt> or add the <tt class="docutils literal"><span class="pre">storage</span></tt> parameter to your <tt class="docutils literal"><span class="pre">FileField</span></tt>s.</p>
+<p>StaticMediaMgr contains a file storage object that defaults to the <tt class="docutils literal"><span class="pre">STATIC_ROOT</span></tt> and <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> settings defined, or else drops back to <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> and <tt class="docutils literal"><span class="pre">MEDIA_URL</span></tt>. Just add:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">staticmediamgr.filestorage</span> <span class="kn">import</span> <span class="n">StaticMediaStorage</span>
+<span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="n">StaticMediaStorage</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>to your settings to make it the default, or else add it to your <tt class="docutils literal"><span class="pre">FileField</span></tt> like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">photo</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">StaticMediaStorage</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">&#39;photos/%Y/%b/</span><span class="si">%d</span><span class="s">/&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>If you have already changed the <tt class="docutils literal"><span class="pre">DEFAULT_FILE_STORAGE</span></tt> setting, this is not necessary.</p>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Segregating Your Media from User-uploaded Media
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>
