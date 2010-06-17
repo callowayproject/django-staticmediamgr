@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 try:
     f = open('README.rst', 'r')
     long_description = f.read()
@@ -15,7 +15,8 @@ setup(name='django-staticmediamgr',
       author='Corey Oordt, The Washington Times',
       author_email='coordt@washingtontimes.com',
       url='http://opensource.washingtontimes.com/projects/django-staticmediamgr/',
-      packages=['staticmediamgr'],
+      packages=find_packages(),
+      install_package_data=True,
       classifiers=['Development Status :: 4 - Beta',
             'Framework :: Django',
             'Intended Audience :: Developers',
