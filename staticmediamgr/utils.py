@@ -69,14 +69,13 @@ def copydir(src, dst, replace_files=True):
                     os.makedirs(dstname)
                 copydir(srcname, dstname, replace_files)
             else:
-                #shutil.copy2(srcname, dstname)
                 compress_copy(srcname, dstname, replace_files)
         except (IOError, os.error), why:
             errors.append((srcname, dstname, str(why)))
         # catch the Error from the recursive copytree so that we can
         # continue with other files
         except Exception, err:
-            errors.append(err.args[0])
+            errors.append((srcname, dstname, str(err)))
     try:
         shutil.copystat(src, dst)
     except OSError, why:
