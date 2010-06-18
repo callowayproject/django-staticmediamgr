@@ -162,11 +162,11 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
             # of storing your media in a directory with the app name. Therefore
             # it could easily collide a users media files.
             tmp_dest = os.path.join(destination, settings.DJANGO_ADMIN_DIR_NAME)
-            print "Copying %s's media to %s" % (app, destination)
-            copy(app_media_path, tmp_dest, purge=False, replace_files=False)
+            print "Checking %s's media" % app
+            copy(app_media_path, tmp_dest, purge=False, replace_files=True)
         elif os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
-            print "Copying %s's media to %s" % (app, destination)
-            copy(app_media_path, destination, purge=False, replace_files=False)
+            print "Checking %s's media" % app
+            copy(app_media_path, destination, purge=False, replace_files=True)
 
 
 def combine_files(destination, path_list):
@@ -178,20 +178,26 @@ def combine_files(destination, path_list):
     :param path_list: A list of full file paths that should be combined
     :type path_list: ``list``
     """
-    result_file = open(destination, 'w')
-    
+    import cStringIO
+    source = cStringIO.StringIO()
+    result_file = None
     try:
-        try:
-            for item in path_list:
-                result_file.write(file(item).read())
-                result_file.write('\n')
-        finally:
+        for item in path_list:
+            source.write(open(item).read())
+            source.write('\n')
+        
+        src_chksum = zlib.adler32(source.getvalue())
+        if os.path.exists(destination):
+            func = "Replacing "
+            dst_chksum = zlib.adler32(open(destination, 'rb').read())
+        else:
+            func = "Writing "
+            dst_chksum = 0
+        
+        if src_chksum != dst_chksum:
+            print "%s%s" % (func, destination)
+            result_file = open(destination, 'w').write(source.getvalue())
+    finally:
+        source.close()
+        if result_file:
             result_file.close()
-    except IOError:
-        # If there was a problem, don't leave a bad file lying around
-        try:
-            if os.path.exists(destination):
-                os.remove(destination)
-        except:
-            pass
-        raise
