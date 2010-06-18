@@ -1,4 +1,4 @@
-import os, shutil, settings, csscompressor, jsmin
+import os, shutil, settings, csscompressor, jsmin, zlib
 
 def compress_copy(src, dst, replace_files=True, compress_css=settings.COMPRESS_CSS, compress_js=settings.COMPRESS_JS):
     """
@@ -22,27 +22,64 @@ def compress_copy(src, dst, replace_files=True, compress_css=settings.COMPRESS_C
     :type compress_js:
         ``bool``
     """
-    root, ext = os.path.splitext(src)
+    if os.path.basename(src) and os.path.basename(src)[0]=='.':
+        print "Skipping hidden file %s" % src
+        return
     
     if not replace_files and os.path.exists(dst):
         return
     
+    root, ext = os.path.splitext(src)
+    
+    fileptr = None
     if compress_css and ext == '.css':
         mincss = csscompressor.compress_cssfile(src)
-        fileptr = open(dst, 'w').write(mincss)
+        src_chksum = zlib.adler32(mincss)
+        if os.path.exists(dst):
+            func = "Replacing minified CSS"
+            dst_chksum = zlib.adler32(open(dst, 'rb').read())
+        else:
+            func = "Writing minified CSS"
+            dst_chksum = 0
+        
+        if src_chksum != dst_chksum:
+            print "%s %s" % (func, dst)
+            fileptr = open(dst, 'w').write(mincss)
         if fileptr:
             fileptr.close()
     elif compress_js and ext == '.js':
         if settings.JS_COMPRESSION_CMD:
+            print "Compressing %s to %s" % (src, dst)
             os.system(settings.JS_COMPRESSION_CMD % {'infile': src, 'outfile': dst})
         else:
             js = open(src).read()
             minjs = jsmin.jsmin(js)
-            fileptr = open(dst, 'w').write(minjs)
+            src_chksum = zlib.adler32(minjs)
+            if os.path.exists(dst):
+                func = "Replacing minified Javascript"
+                dst_chksum = zlib.adler32(open(dst, 'rb').read())
+            else:
+                func = "Writing minified Javascript"
+                dst_chksum = 0
+            
+            if src_chksum != dst_chksum:
+                print "%s %s" % (func, dst)
+                fileptr = open(dst, 'w').write(minjs)
             if fileptr:
                 fileptr.close()
+            
     else:
-        shutil.copy2(src, dst)
+        src_chksum = zlib.adler32(open(src, 'rb').read())
+        if os.path.exists(dst):
+            func = "Replacing"
+            dst_chksum = zlib.adler32(open(dst, 'rb').read())
+        else:
+            func = "Copying"
+            dst_chksum = 0
+        
+        if src_chksum != dst_chksum:
+            print "%s %s" % (func, dst)
+            shutil.copy2(src, dst)
 
 def copydir(src, dst, replace_files=True):
     """
@@ -69,14 +106,13 @@ def copydir(src, dst, replace_files=True):
                     os.makedirs(dstname)
                 copydir(srcname, dstname, replace_files)
             else:
-                #shutil.copy2(srcname, dstname)
                 compress_copy(srcname, dstname, replace_files)
         except (IOError, os.error), why:
             errors.append((srcname, dstname, str(why)))
         # catch the Error from the recursive copytree so that we can
         # continue with other files
         except Exception, err:
-            errors.append(err.args[0])
+            errors.append((srcname, dstname, str(err)))
     try:
         shutil.copystat(src, dst)
     except OSError, why:
@@ -113,9 +149,12 @@ def copy(original, destination, purge=settings.PURGE_OLD_FILES, replace_files=Tr
     :type replace_files:
         ``bool``
     """
-    # Check if the original exists
     if not os.path.exists(original):
         print "Can't access %s or it doesn't exist." % original
+        return
+    
+    if os.path.basename(original) and os.path.basename(original)[0] == '.':
+        print "Skipping the hidden item " % original
         return
     
     # If original is a file, copy it over
@@ -125,12 +164,17 @@ def copy(original, destination, purge=settings.PURGE_OLD_FILES, replace_files=Tr
         else:
             dst_file = destination
         if os.path.exists(dst_file) and replace_files:
-            shutil.copy2(original, dst_file)
+            src_chksum = zlib.adler32(open(original, 'rb').read())
+            dst_chksum = zlib.adler32(open(dst_file, 'rb').read())
+            if src_chksum != dst_chksum:
+                print "Replacing %s" % dst_file
+                shutil.copy2(original, dst_file)
     
     # if original is a directory, check for an existing directory
     # Empty it out if configured
     if os.path.isdir(original):
         if os.path.exists(destination) and purge:
+            print "Purging %s" % destination
             shutil.rmtree(destination)
             os.makedirs(destination)
         elif os.path.exists(destination) and not os.path.isdir(destination):
@@ -163,11 +207,11 @@ def copy_app_media(destination=settings.APP_MEDIA_PATH):
             # of storing your media in a directory with the app name. Therefore
             # it could easily collide a users media files.
             tmp_dest = os.path.join(destination, settings.DJANGO_ADMIN_DIR_NAME)
-            print "Copying %s's media to %s" % (app, destination)
-            copy(app_media_path, tmp_dest, purge=False, replace_files=False)
+            print "Checking %s's media" % app
+            copy(app_media_path, tmp_dest, purge=False, replace_files=True)
         elif os.path.exists(app_media_path) and os.path.isdir(app_media_path) and not os.path.exists(os.path.join(app_media_path, '__init__.py')):
-            print "Copying %s's media to %s" % (app, destination)
-            copy(app_media_path, destination, purge=False, replace_files=False)
+            print "Checking %s's media" % app
+            copy(app_media_path, destination, purge=False, replace_files=True)
 
 
 def combine_files(destination, path_list):
@@ -179,20 +223,26 @@ def combine_files(destination, path_list):
     :param path_list: A list of full file paths that should be combined
     :type path_list: ``list``
     """
-    result_file = open(destination, 'w')
-    
+    import cStringIO
+    source = cStringIO.StringIO()
+    result_file = None
     try:
-        try:
-            for item in path_list:
-                result_file.write(file(item).read())
-                result_file.write('\n')
-        finally:
+        for item in path_list:
+            source.write(open(item).read())
+            source.write('\n')
+        
+        src_chksum = zlib.adler32(source.getvalue())
+        if os.path.exists(destination):
+            func = "Replacing "
+            dst_chksum = zlib.adler32(open(destination, 'rb').read())
+        else:
+            func = "Writing "
+            dst_chksum = 0
+        
+        if src_chksum != dst_chksum:
+            print "%s%s" % (func, destination)
+            result_file = open(destination, 'w').write(source.getvalue())
+    finally:
+        source.close()
+        if result_file:
             result_file.close()
-    except IOError:
-        # If there was a problem, don't leave a bad file lying around
-        try:
-            if os.path.exists(destination):
-                os.remove(destination)
-        except:
-            pass
-        raise

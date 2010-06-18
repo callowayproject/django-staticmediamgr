@@ -99,4 +99,13 @@ STATIC_URL = '/media/'
 STATIC_MEDIA_APP_MEDIA_PATH = os.path.join(APP, 'media2')
 STATIC_MEDIA_COMPRESS_JS = True
 STATIC_MEDIA_COMPRESS_CSS = True
+STATIC_MEDIA_PURGE_OLD_FILES = False
+
+STATIC_MEDIA_FILE_COMBINATIONS = {
+    MEDIA_ROOT+'/css/combo.css': [
+        MEDIA_ROOT+'/css/base.css', 
+        MEDIA_ROOT+'/css/forms.css', 
+        MEDIA_ROOT+'/css/coolui.css'],
+}
+
 # STATIC_MEDIA_JS_COMPRESSION_CMD = 'java -jar ~/compiler-latest/compiler.jar --js %(infile)s --js_output_file %(outfile)s'

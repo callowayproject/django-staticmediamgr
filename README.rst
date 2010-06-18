@@ -2,6 +2,8 @@
 Django-StaticMediaMgr
 =====================
 
+**New in version 0.6:** Added checksum-based selective copying of files. Fixed several bugs relating to combining files. Changed how application media was copied so it will override its own changes.
+
 **New in version 0.5:** Added a context processor to add ``STATIC_URL`` to the request context as well as a setting for ``STATIC_ROOT``\ . This allows you to store your regular media separately from uploaded media (which is in ``MEDIA_ROOT``\ ). Also added a setting to exclude apps from copying their media and a specialized way of handling django admin media copying.
 
 **New in version 0.4:** Fixed a bug where copying multiple directories into the same directory with the purge options would only allow the last copy to work. Now multiple source directories can be copied into one destination, with each successive copy potentially overwriting the previous files.
